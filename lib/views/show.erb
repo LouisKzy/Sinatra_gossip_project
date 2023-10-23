@@ -1,11 +1,11 @@
 <html>
   <head>
-    <title>Dans les petits potins</title>
+    <title>Potin N°<%= gossip.id %></title>
   </head>
   <body>
-    <h1>Voici la page du potin !</h1>
-    <p>Son auteur : </p>
-  
-    </form>
+    <h1>Potin N°<%= gossip.id %></h1>
+    <p>Auteur : <%= gossip.author %></p>
+    <p>Contenu : <%= gossip.content %></p>
+    <a href="/">Retour à la liste des potins</a>
   </body>
 </html>

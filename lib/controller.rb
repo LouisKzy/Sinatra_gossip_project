@@ -1,6 +1,17 @@
 
 require_relative 'gossip'
 class ApplicationController < Sinatra::Base
+  def initialize
+    super
+    
+    
+    csv_file = File.join('db', 'gossip.csv')
+    CSV.foreach(csv_file) do |row|
+      author, content = row
+    Gossip.new(author, content)
+    end
+
+  end
   get '/' do
     erb :index, locals: {gossips: Gossip.all}
   end
@@ -18,11 +29,13 @@ class ApplicationController < Sinatra::Base
   end
   
   get '/gossips/:id' do
-    erb :show
-    # matches "GET /hello/foo" and "GET /hello/bar"
-    # params['name'] is 'foo' or 'bar'
-    # n stores params['name']
-    
+    id = params['id']
+    gossip = Gossip.find(id)
+    if gossip
+      erb :show, locals: { gossips: gossip }
+    else 
+      "Potin non trouvé"
+    end
   end
 
 
